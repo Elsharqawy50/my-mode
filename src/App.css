@@ -1,38 +1,63 @@
-.App {
+body {
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+aside.EmojiPickerReact.epr-main {
+  position: absolute !important;
+  z-index: 10 !important;
+}
+
+.rdt_Table {
+  height: 100vh;
+}
+
+.heading {
+  font-size: 3rem;
   text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 3rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  margin: 100px auto;
+  width: 90rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.rdt_TableHead {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.rdt_TableCell {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.main_btn {
+  border: 1px solid dodgerblue;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.8rem;
+  background-color: white;
+  color: dodgerblue;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.main_btn:hover {
   color: white;
+  background-color: dodgerblue;
+  border-radius: 0.25rem;
 }
 
-.App-link {
-  color: #61dafb;
+.input {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input:focus {
+  outline: 0;
 }

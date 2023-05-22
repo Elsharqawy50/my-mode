@@ -1,0 +1,51 @@
+{
+  "collages": {
+    "data": [
+      {
+        "id": 1,
+        "collageName": "Thwaiba",
+        "details": "fggdgfdg",
+        "emoji": "smiling face with 3 hearts 🥰"
+      },
+      {
+        "id": 2,
+        "collageName": "Mahmoud Hesham",
+        "details": "afasffd",
+        "emoji": "smiley 😃"
+      },
+      {
+        "id": 3,
+        "collageName": "Beshoy",
+        "details": "dasdasdasdasdasd",
+        "emoji": "grin 😁"
+      },
+      {
+        "id": 4,
+        "collageName": "Mostafa",
+        "details": "sadadasdas",
+        "emoji": "laughing 😆"
+      },
+      {
+        "id": 5,
+        "collageName": "Abdelrahman",
+        "details": "asdasdasd",
+        "emoji": "grin 😁"
+      },
+      {
+        "id": 6,
+        "collageName": "Mohamed",
+        "details": "",
+        "emoji": ""
+      },
+      {
+        "id": 7,
+        "collageName": "Khaled",
+        "details": "asdasdasdas",
+        "emoji": "smile 😄"
+      }
+    ]
+  },
+  "restTime": {
+    "time": 1684792799000
+  }
+}
