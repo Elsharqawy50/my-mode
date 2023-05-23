@@ -104,11 +104,11 @@ const TableWithReactQueryFirebase = () => {
     {
       name: "Collage Name",
       selector: (row) => row?.collageName,
-      width: "200px",
+      width: "170px",
     },
     {
       name: "Select Emoji",
-      width: "200px",
+      width: "150px",
       selector: (row) => {
         return (
           <>

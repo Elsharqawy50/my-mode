@@ -9,7 +9,8 @@ aside.EmojiPickerReact.epr-main {
 }
 
 .rdt_Table {
-  height: calc(100vh - 280px) !important;
+  height: calc(100vh - 11.5rem) !important;
+  width: 100%;
 }
 
 .heading {
@@ -20,8 +21,8 @@ aside.EmojiPickerReact.epr-main {
 }
 
 .container {
-  margin: 100px auto;
-  width: 90rem;
+  margin: 4.3rem auto 0;
+  max-width: 75rem !important;
 }
 
 .rdt_TableHead {
