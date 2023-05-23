@@ -85,7 +85,7 @@ const TableWithReactQueryFirebase = () => {
           return c?.id === row?.id
             ? {
                 ...c,
-                details: input,
+                details: input.trim(),
               }
             : c;
         })
@@ -211,7 +211,7 @@ const TableWithReactQueryFirebase = () => {
           }}
           value={input}
           onChange={(e) => {
-            setInput(e.target.value.trim());
+            setInput(e.target.value);
           }}
           rows={5}
         />
