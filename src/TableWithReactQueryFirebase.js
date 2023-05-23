@@ -46,9 +46,6 @@ const TableWithReactQueryFirebase = () => {
     onSuccess: () => {
       queryClient.invalidateQueries("collages");
     },
-    onError: () => {
-      // refetch();
-    },
   });
 
   useEffect(() => {
