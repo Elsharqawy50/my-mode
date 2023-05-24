@@ -24,6 +24,20 @@ const editAllCollages = (body) => {
   });
 };
 
+const fetchDate = () => {
+  return getDocs(collection(db, "restTime")).then((res) => {
+    const array = [];
+    res.forEach((doc) => {
+      array.push({ id: doc.id, ...doc.data() });
+    });
+    return array[0].data;
+  });
+};
+
+const editDate = (body) => {
+  return setDoc(doc(db, "restTime", "data"), { data: body });
+};
+
 const TableWithReactQueryFirebase = () => {
   const [openEmojiId, setOpenEmojiId] = useState(0);
   const [input, setInput] = useState("");
@@ -39,6 +53,11 @@ const TableWithReactQueryFirebase = () => {
     refetch,
   } = useQuery("collages", fetchTable);
 
+  const { data: restTimeData, isLoading: isLoadingDate } = useQuery(
+    "restTime",
+    fetchDate
+  );
+
   // mutation funcs
   const queryClient = useQueryClient();
 
@@ -48,18 +67,15 @@ const TableWithReactQueryFirebase = () => {
     },
   });
 
+  const { mutate: mutateDate } = useMutation(editDate, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("restTime");
+    },
+  });
+
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem("restTime"))) {
-      localStorage.setItem(
-        "restTime",
-        JSON.stringify(new Date(moment().endOf("day").format()).getTime())
-      );
-    }
-
-    const restTime = JSON.parse(localStorage.getItem("restTime"));
-
-    if (new Date().getTime() > restTime) {
-      if (!isLoading) {
+    if (new Date().getTime() > restTimeData) {
+      if (!isLoading && !isLoadingDate) {
         mutateAllCollages(
           collagesData?.map((c) => {
             return {
@@ -69,13 +85,10 @@ const TableWithReactQueryFirebase = () => {
             };
           })
         );
-        localStorage.setItem(
-          "restTime",
-          JSON.stringify(new Date(moment().endOf("day").format()).getTime())
-        );
+        mutateDate(new Date(moment().endOf("day").format()).getTime());
       }
     }
-  }, [mutateAllCollages, isLoading]);
+  }, [mutateDate, mutateAllCollages, isLoading, isLoadingDate]);
 
   // handle enter key press
   const enterPressHandler = (e, row) => {
