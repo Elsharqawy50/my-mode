@@ -22,7 +22,7 @@ aside.EmojiPickerReact.epr-main {
 
 .container {
   margin: 4.3rem auto 0;
-  max-width: 75rem !important;
+  max-width: 77rem !important;
 }
 
 .rdt_TableHead {
@@ -38,18 +38,33 @@ aside.EmojiPickerReact.epr-main {
 }
 
 .main_btn {
-  border: 1px solid dodgerblue;
   padding: 0.5rem 0.5rem;
   font-size: 0.8rem;
-  background-color: white;
-  color: dodgerblue;
   border-radius: 0.25rem;
   cursor: pointer;
 }
 
-.main_btn:hover {
+.btn__outline-blue {
+  border: 1px solid dodgerblue;
+  background-color: white;
+  color: dodgerblue;
+}
+
+.btn__outline-blue:hover {
   color: white;
   background-color: dodgerblue;
+  border-radius: 0.25rem;
+}
+
+.btn__outline-red {
+  border: 1px solid #dc3545;
+  background-color: white;
+  color: #dc3545;
+}
+
+.btn__outline-red:hover {
+  color: white;
+  background-color: #dc3545;
   border-radius: 0.25rem;
 }
 
@@ -57,8 +72,11 @@ aside.EmojiPickerReact.epr-main {
   padding: 0.25rem 0.5rem;
   font-size: 0.8rem;
   width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 0.5rem;
 }
 
 .input:focus {
   outline: 0;
 }
+

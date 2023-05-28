@@ -1,42 +1,12 @@
-import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import Model from "./Model";
+import Model from "./components/Model";
 import moment from "moment/moment";
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
-import { db } from "./firebase";
-
-const fetchTable = () => {
-  return getDocs(collection(db, "collages")).then((res) => {
-    const array = [];
-    res.forEach((doc) => {
-      array.push({ id: doc.id, ...doc.data() });
-    });
-    return array[0].data;
-  });
-};
-
-const editAllCollages = (body) => {
-  return setDoc(doc(db, "collages", "data"), {
-    data: body,
-  });
-};
-
-const fetchDate = () => {
-  return getDocs(collection(db, "restTime")).then((res) => {
-    const array = [];
-    res.forEach((doc) => {
-      array.push({ id: doc.id, ...doc.data() });
-    });
-    return array[0].data;
-  });
-};
-
-const editDate = (body) => {
-  return setDoc(doc(db, "restTime", "data"), { data: body });
-};
+import Form from "./components/AddForm";
+import { editIDsInArray } from "./helpers/functions";
+import { editAllCollages, editDate, fetchCollagesTable, fetchDate } from "./apis/api";
 
 const TableWithReactQueryFirebase = () => {
   const [openEmojiId, setOpenEmojiId] = useState(0);
@@ -44,14 +14,13 @@ const TableWithReactQueryFirebase = () => {
   const [modalShow, setModalShow] = useState(false);
   const [rowData, setRowData] = useState({});
 
-  // fetch data
+  // fetch funcs
   const {
     data: collagesData,
     isLoading,
     isError,
     error,
-    refetch,
-  } = useQuery("collages", fetchTable);
+  } = useQuery("collages", fetchCollagesTable);
 
   const { data: restTimeData, isLoading: isLoadingDate } = useQuery(
     "restTime",
@@ -73,6 +42,7 @@ const TableWithReactQueryFirebase = () => {
     },
   });
 
+  // reset data everyday morning
   useEffect(() => {
     if (new Date().getTime() > restTimeData) {
       if (!isLoading && !isLoadingDate) {
@@ -90,7 +60,7 @@ const TableWithReactQueryFirebase = () => {
     }
   }, [mutateDate, mutateAllCollages, isLoading, isLoadingDate]);
 
-  // handle enter key press
+  // handle enter key press to add status to collage
   const enterPressHandler = (e, row) => {
     if (e.key === "Enter") {
       mutateAllCollages(
@@ -106,6 +76,19 @@ const TableWithReactQueryFirebase = () => {
       setInput("");
       setModalShow(false);
     }
+  };
+
+  const addCollageHandler = (value) => {
+    const submittedArray = [
+      ...collagesData,
+      {
+        collageName: value,
+        details: "",
+        emoji: "",
+      },
+    ];
+    const newCollages = editIDsInArray(submittedArray);
+    mutateAllCollages(newCollages);
   };
 
   const columns = [
@@ -126,7 +109,7 @@ const TableWithReactQueryFirebase = () => {
         return (
           <>
             <button
-              className="main_btn"
+              className="main_btn btn__outline-blue"
               onClick={() => {
                 setOpenEmojiId(row?.id);
                 if (openEmojiId !== 0) {
@@ -174,9 +157,9 @@ const TableWithReactQueryFirebase = () => {
       name: "Add Details",
       selector: (row) => {
         return (
-          <>
+          <div className="gap-3 d-flex">
             <button
-              className="main_btn"
+              className="main_btn btn__outline-blue"
               onClick={() => {
                 setModalShow(true);
                 setRowData(row);
@@ -185,7 +168,19 @@ const TableWithReactQueryFirebase = () => {
             >
               Add Details
             </button>
-          </>
+            <button
+              className="main_btn btn__outline-red"
+              onClick={() => {
+                const deleteCollage = collagesData.filter(
+                  (collage) => collage.id !== row.id
+                );
+                const newCollages = editIDsInArray(deleteCollage);
+                mutateAllCollages(newCollages);
+              }}
+            >
+              Delete
+            </button>
+          </div>
         );
       },
     },
@@ -196,7 +191,7 @@ const TableWithReactQueryFirebase = () => {
   }
 
   if (isError) {
-    return <h2>{error}</h2>;
+    return <h2>{error.message}</h2>;
   }
 
   return (
@@ -205,6 +200,7 @@ const TableWithReactQueryFirebase = () => {
         <h1 className="heading">
           my today mode 😄 {moment().format("DD/MM/yyyy")}
         </h1>
+        <Form onAddCollage={addCollageHandler} />
         <DataTable columns={columns} data={collagesData} />
       </div>
       <Model
@@ -215,7 +211,7 @@ const TableWithReactQueryFirebase = () => {
           setRowData({});
         }}
         updateButton={"Update"}
-        footer={false} // if u don't want footer === false
+        footer={false}
         size={"lg"}
       >
         <textarea

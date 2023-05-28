@@ -3,7 +3,7 @@ import EmojiPicker from "emoji-picker-react";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import Model from "./Model";
+import Model from "./components/Model";
 import moment from "moment/moment";
 
 const Url =
