@@ -4,32 +4,32 @@
       {
         "id": 1,
         "collageName": "Thwaiba",
-        "details": "fggdgfdg",
-        "emoji": "smiling face with 3 hearts 🥰"
+        "details": "asdsad",
+        "emoji": ""
       },
       {
         "id": 2,
         "collageName": "Mahmoud Hesham",
-        "details": "afasffd",
-        "emoji": "smiley 😃"
+        "details": "",
+        "emoji": ""
       },
       {
         "id": 3,
         "collageName": "Beshoy",
-        "details": "dasdasdasdasdasd",
-        "emoji": "grin 😁"
+        "details": "",
+        "emoji": ""
       },
       {
         "id": 4,
         "collageName": "Mostafa",
-        "details": "sadadasdas",
-        "emoji": "laughing 😆"
+        "details": "",
+        "emoji": ""
       },
       {
         "id": 5,
         "collageName": "Abdelrahman",
-        "details": "asdasdasd",
-        "emoji": "grin 😁"
+        "details": "",
+        "emoji": ""
       },
       {
         "id": 6,
@@ -40,12 +40,12 @@
       {
         "id": 7,
         "collageName": "Khaled",
-        "details": "asdasdasdas",
-        "emoji": "smile 😄"
+        "details": "",
+        "emoji": ""
       }
     ]
   },
   "restTime": {
-    "time": 1684792799000
+    "time": 1689109199000
   }
 }
